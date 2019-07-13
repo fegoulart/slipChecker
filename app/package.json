@@ -1,0 +1,34 @@
+{
+  "name": "slipchecker",
+  "version": "1.0.0",
+  "description": "REST API to validate payment slips",
+  "main": "app.js",
+  "scripts": {
+    "start": "NODE_ENV=production pm2 start app.js",
+    "dev": "NODE_ENV=development nodemon app.js",
+    "test": "mocha -R spec test/**/*",
+    "coverage": "nyc npm run test",
+    "stop": "pm2 stop app.js"
+  },
+  "author": "Fernando Luiz Goulart <fegoulart@gmail.com>",
+  "license": "Apache License 2.0",
+  "dependencies": {
+    "async": "^3.1.0",
+    "body-parser": "~1.19.0",
+    "express": "~4.17.1",
+    "moment": "^2.24.0",
+    "morgan": "~1.9.1",
+    "multer": "~1.4.1",
+    "nodemon": "^1.19.1",
+    "pm2": "^3.5.1",
+    "request": "^2.88.0",
+    "socket.io": "2.2.0"
+  },
+  "devDependencies": {
+    "chai": "~4.2.0",
+    "chai-things": "^0.2.0",
+    "mocha": "~6.1.4",
+    "supertest": "~4.0.2",
+    "nyc": "^14.1.1"
+  }
+}
