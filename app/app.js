@@ -4,7 +4,7 @@
 // get the packages we need ============
 // =======================
 let express     = require('express');
-let https       = require('https');
+//let https       = require('https');
 let http       = require('http');
 //var fs          = require('fs');
 let app         = express();
@@ -15,7 +15,7 @@ let morgan      = require('morgan');
 //var certificate = fs.readFileSync('/etc/ssl/app.webaniversario.com.br.crt');
 
 
-//let config = require('./config'); // get our config file
+
 let routers = require('./routers/index');
 
 // =======================
@@ -59,6 +59,8 @@ app.use(function (req, res, next) {
 });
 
 app.use('/ping',routers.ping);
+app.use('',routers.slip);
+
 
 // =======================
 // start the server ======

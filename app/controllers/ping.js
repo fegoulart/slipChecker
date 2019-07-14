@@ -5,10 +5,7 @@ module.exports = {
 };
 
 function get(req, res) {
-    res.status(200)
+    res.status(config.httpOk)
         .json({message: 'All good. Go back to bed.'});
 }
 
-/*
-
- */

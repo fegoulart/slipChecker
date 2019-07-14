@@ -11,8 +11,16 @@ router.use(bodyParser.urlencoded({extended:false}));
 router.use(bodyParser.json());
 router.use(multer.array());
 
+
+
 router
-    .route('/ping')
-    .get(controllers.ping.get);
+    .route('/')
+    .post(controllers.slip.verify) // Verifies if typedData is good
+    .post(controllers.boleto.read) // If it is a titulo will skip using .next('route')
+    .post(controllers.titulo.read);
+
+
+
+
 
 module.exports=router;
