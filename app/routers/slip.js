@@ -16,8 +16,8 @@ router.use(multer.array());
 router
     .route('/')
     .post(controllers.slip.verify) // Verifies if typedData is good
-    .post(controllers.boleto.read) // If it is a titulo will skip using .next('route')
-    .post(controllers.titulo.read);
+    .post(controllers.titulo.read) // If it is a convenio will skip using .next('route')
+    .post(controllers.convenio.read);
 
 
 

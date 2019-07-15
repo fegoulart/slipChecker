@@ -12,7 +12,7 @@ router.use(bodyParser.json());
 router.use(multer.array());
 
 router
-    .route('/ping')
+    .route('')
     .get(controllers.ping.get);
 
 module.exports=router;

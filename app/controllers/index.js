@@ -3,6 +3,6 @@
 module.exports = {
     ping: require('./ping'),
     slip: require('./slip'),
-    boleto: require('./boleto'),
+    convenio: require('./convenio'),
     titulo: require('./titulo')
 };
