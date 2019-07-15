@@ -73,14 +73,12 @@ describe('Slip controller', function () {
                 .end(function (err, res) {
                     expect(res.statusCode).to.be.equal(200);
                     expect(res.body).have.property('validData', true);
-                    expect(res.body).have.property('amount', 0);
-                    expect(res.body).have.property('barcode', null);
-                    expect(res.body).have.property('dueDate', null);
+                    expect(res.body).have.property('amount', 398.93);
+                    expect(res.body).have.property('barcode', "84630000003989302962019071000300000356248299");
+                    expect(res.body).have.property('dueDate', "10/07/2019");
                     expect(res.body).have.property('message', 'Convenio successfully verified.');
                     done();
                 });
-
-
         });
 
 

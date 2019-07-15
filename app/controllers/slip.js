@@ -7,14 +7,13 @@ module.exports = {
 };
 
 
-
-
-// titulo NET
-// 84630000003-7 98930296201-8 90710003000-2 00356248299-6
-
-// titulo despacon
-//03399.21199 68400.000029 35050.501010 7 79440000047400 --57 numeros
-
+/***
+ * Checks is typed data is a titulo, a convenio or invalid. It will route accordingly.
+ * @param req
+ * @param res
+ * @param next
+ * @returns {*}
+ */
 function verify(req, res, next) {
 
     try {

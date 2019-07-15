@@ -12,6 +12,7 @@ const titulo4 = '03399.21193 68400.000029 35050.501010 7 79440000047400' //inval
 const titulo5 = '03399.21199 68400.000022 35050.501010 7 79440000047400' //invalid field2 DV
 const titulo6 = '03399.21199 68400.000029 35050.501015 7 79440000047400' //invalid field3 DV
 const titulo7 = '23792.40308 90000.871286 57003.613700 4 79460000122399' //amount = 1233,99
+const titulo8 = '23792.40308 90000.871286 S7003.613700 4 79460000122399' //letter test
 
 chai.use(require('chai-things'));
 
@@ -103,7 +104,7 @@ describe('Titulo controller', function () {
 
 
         });
-        it('check amount', function (done) {
+        it('check amount and barcode', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo7) // x-www-form-urlencoded
@@ -115,6 +116,23 @@ describe('Titulo controller', function () {
                     expect(res.body).have.property('barcode', "23794794600001223992403090000871285700361370");
                     expect(res.body).have.property('dueDate', "10/07/2019");
                     expect(res.body).have.property('message', 'Titulo successfully verified.');
+                    done();
+                });
+
+
+        });
+        it('letter invalid test', function (done) {
+            request(app)
+                .post('/')
+                .send('typedData=' + titulo8) // x-www-form-urlencoded
+                .set('Accept', 'application/json')
+                .end(function (err, res) {
+                    expect(res.statusCode).to.be.equal(400);
+                    expect(res.body).have.property('validData', false);
+                    expect(res.body).have.property('amount', 0);
+                    expect(res.body).have.property('barcode', null);
+                    expect(res.body).have.property('dueDate', null);
+                    expect(res.body).have.property('message', 'Invalid data.');
                     done();
                 });
 

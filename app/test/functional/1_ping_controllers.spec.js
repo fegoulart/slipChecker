@@ -19,6 +19,14 @@ describe('Ping controller', function(){
                     done();
                 });
         });
+        it('should answer', function(done) {
+            request(app)
+                .options('/ping')
+                .end(function(err,res){
+                    expect(res.statusCode).to.equal(204);
+                    done();
+                });
+        });
     });
 
 

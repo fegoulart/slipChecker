@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production pm2 start app.js",
     "dev": "NODE_ENV=development nodemon app.js",
-    "test": "mocha -R spec test/**/*",
+    "test": "mocha --exit -R spec test/**/*",
     "coverage": "nyc npm run test",
     "stop": "pm2 stop app.js"
   },

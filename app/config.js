@@ -24,7 +24,11 @@ module.exports = function () {
                 'invalidCurrencyMsg' : 'Invalid currency code.',
                 'invalidField1Msg' : 'Invalid field1.',
                 'invalidField2Msg' : 'Invalid field2.',
-                'invalidField3Msg' : 'Invalid field3.'
+                'invalidField3Msg' : 'Invalid field3.',
+                'invalidField4Msg' : 'Invalid field4.',
+                'invalidProductMsg': 'Invalid product.',
+                'invalidSegmentMsg': 'Invalid segment.',
+                'invalidRealValueMsg' : 'Invalid real or reference amount Id.'
             };
         case 'production':
             return {
@@ -49,7 +53,11 @@ module.exports = function () {
                 'invalidCurrencyMsg' : 'Invalid currency code.',
                 'invalidField1Msg' : 'Invalid field1.',
                 'invalidField2Msg' : 'Invalid field2.',
-                'invalidField3Msg' : 'Invalid field3.'
+                'invalidField3Msg' : 'Invalid field3.',
+                'invalidField4Msg' : 'Invalid field4.',
+                'invalidProductMsg': 'Invalid product.',
+                'invalidSegmentMsg': 'Invalid segment.',
+                'invalidRealValueMsg' : 'Invalid real or reference amount Id.'
             };
         default:
             return {
@@ -74,7 +82,11 @@ module.exports = function () {
                 'invalidCurrencyMsg' : 'Invalid currency code.',
                 'invalidField1Msg' : 'Invalid field1.',
                 'invalidField2Msg' : 'Invalid field2.',
-                'invalidField3Msg' : 'Invalid field3.'
+                'invalidField3Msg' : 'Invalid field3.',
+                'invalidField4Msg' : 'Invalid field4.',
+                'invalidProductMsg': 'Invalid product.',
+                'invalidSegmentMsg': 'Invalid segment.',
+                'invalidRealValueMsg' : 'Invalid real or reference amount Id.'
             }
     }
 };

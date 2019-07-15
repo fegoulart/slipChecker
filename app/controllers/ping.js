@@ -6,6 +6,12 @@ module.exports = {
     get: get
 };
 
+/***
+ * Returns a simple message "All good. Go back to bed."
+ * @param req
+ * @param res
+ * @returns {*}
+ */
 function get(req, res) {
     try {
         res.status(config().httpOk)
