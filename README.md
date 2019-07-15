@@ -106,14 +106,25 @@ npm run coverage
 ## Building the server
 
   
-
+### Docker
 ```
 
 docker build -t slipchecker .
-docker run -p 8080:8080 slipchecker
+docker create --name slipchecker -p 8080:8080 slipchecker
 docker start slipchecker
 
 ```
+
+### Local
+
+Inside app folder:
+```
+
+npm install
+npm run start
+
+```
+
 
   
 ## Missing aspects
