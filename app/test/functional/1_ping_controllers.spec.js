@@ -8,9 +8,9 @@ let expect = chai.expect;
 
 chai.use(require('chai-things'));
 
-describe('Ping controller', function(){
+describe('Ping controller test', function(){
     describe('.get - Get /ping', function(){
-        it('should answer', function(done) {
+        it('get /ping should answer test', function(done) {
             request(app)
                 .get('/ping')
                 .end(function(err,res){
@@ -19,7 +19,7 @@ describe('Ping controller', function(){
                     done();
                 });
         });
-        it('should answer', function(done) {
+        it('options /ping should answer test', function(done) {
             request(app)
                 .options('/ping')
                 .end(function(err,res){

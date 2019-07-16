@@ -12,9 +12,9 @@ const titulo1 = '03399.21199 68400.000029 35050.501010 7 79440000047400'
 chai.use(require('chai-things'));
 
 
-describe('Slip controller', function () {
+describe('Slip controller test', function () {
     describe('.post - Post /', function () {
-        it('should not accept fewer numbers code', function (done) {
+        it('typedData with short size should not be accepted test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=1234567891011121314') // x-www-form-urlencoded
@@ -31,7 +31,7 @@ describe('Slip controller', function () {
 
 
         });
-        it('should not accept wrong form data key', function (done) {
+        it('invalid form data key should be not accepted test', function (done) {
             request(app)
                 .post('/')
                 .send('typed=1234567891011121314') // x-www-form-urlencoded
@@ -48,7 +48,7 @@ describe('Slip controller', function () {
 
 
         });
-        it('should find out a titulo', function (done) {
+        it('should find out a titulo test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo1) // x-www-form-urlencoded
@@ -65,7 +65,7 @@ describe('Slip controller', function () {
 
 
         });
-        it('should find out a convenio', function (done) {
+        it('should find out a convenio test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + convenio1) // x-www-form-urlencoded

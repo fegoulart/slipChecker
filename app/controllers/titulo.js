@@ -6,10 +6,16 @@ let helper = require('./helper');
 
 
 let brazilianBanks = ["654", "246", "025", "641", "213", "019", "029", "000", "740", "107", "031", "739", "096", "318", "752", "248", "218", "065", "036", "204", "394", "237", "225", "M15", "208", "044", "263", "473", "412", "040", "745", "M08", "241", "M19", "215", "756", "748", "075", "721", "222", "505", "229", "266", "003", "083", "M21", "707", "300", "495", "494", "M06", "024", "456", "214", "001", "047", "037", "039", "041", "004", "265", "M03", "224", "626", "M18", "233", "734", "M07", "612", "M22", "063", "M11", "604", "320", "653", "630", "077", "249", "M09", "184", "479", "376", "074", "217", "076", "757", "600", "212", "M12", "389", "746", "M10", "738", "066", "243", "045", "M17", "623", "611", "613", "094", "643", "724", "735", "638", "M24", "747", "088", "356", "633", "741", "M16", "072", "453", "422", "033", "250", "743", "749", "366", "637", "012", "464", "082", "M20", "M13", "634", "M14", "M23", "655", "610", "370", "021", "719", "755", "744", "073", "078", "069", "070", "092", "104", "477", "081", "097", "085", "099", "090", "089", "087", "098", "487", "751", "064", "062", "399", "168", "492", "652", "341", "079", "488", "014", "753", "086", "254", "409", "230", "091", "084"];
-let currencies = ["9"]
+let currencies = ["9"];
 
 module.exports = {
-    read: read
+    read: read,
+    getTituloDueDate: getTituloDueDate,
+    barcodeBuilder: barcodeBuilder,
+    isABank: isABank,
+    isValidCurrency: isValidCurrency,
+    brazilianBanks: brazilianBanks,
+    currencies:currencies
 };
 
 /***
@@ -18,7 +24,7 @@ module.exports = {
  * @param baseDate
  * @returns {null|moment.Moment}
  */
-function getDueDate(factor, baseDate) {
+function getTituloDueDate(factor, baseDate) {
     try {
         if (factor === null || factor === "" || factor === undefined || baseDate === null || baseDate === "" || baseDate === undefined) {
             return null;
@@ -36,24 +42,6 @@ function getDueDate(factor, baseDate) {
 }
 
 /***
- * Checks if only numbers are present
- * @param data
- * @param size
- * @returns {boolean}
- */
-function isNumeric(data, size) {
-    try {
-        let myRegex = "[\\d]{" + size.toString() + "}";
-        let re = new RegExp(myRegex, "gmi");
-        return re.test(data);
-    } catch (err) {
-        console.log("Request: " + req.body);
-        console.log("Titulo read error " + err.name + " - " + err.message);
-        return false
-    }
-}
-
-/***
  * Calculates the general dv and returns the barcode
  * @param bankCode
  * @param currencyCode
@@ -62,9 +50,14 @@ function isNumeric(data, size) {
  * @param filling
  * @returns {string|null}
  */
-const barcodeBuilder = (bankCode, currencyCode, dueFactor, amount, filling) => {
+function barcodeBuilder(bankCode, currencyCode, dueFactor, amount, filling) {
     try {
-        let dv = helper.moduloOnze(bankCode.toString() + currencyCode.toString() + dueFactor.toString() + amount.toString() + filling.toString())
+
+        let code = bankCode.toString() + currencyCode.toString() + dueFactor.toString() + amount.toString() + filling.toString();
+        if (code.match(/[^\d\w]/gmi)) {
+            return null
+        }
+        let dv = helper.moduloOnze(code)
         let barcode = bankCode.toString() + currencyCode.toString() + dv + dueFactor.toString() + amount.toString() + filling.toString()
         return barcode
     } catch (err) {
@@ -141,7 +134,7 @@ function read(req, res, next) {
                 let dueFactor = req.body.typedData.substring(33, 37)
                 let stringAmount = req.body.typedData.substring(37, 47)
                 let amount = 1 * req.body.typedData.substring(37, 45) + 0.01 * req.body.typedData.substring(45, 47)
-                let filler = field1.substring(4,9) + field2 + field3
+                let filler = field1.substring(4, 9) + field2 + field3
                 let dueDate = null
                 let barcode = "00000000000000000000000000000000000000000000"
                 //Check Bank Code
@@ -157,7 +150,7 @@ function read(req, res, next) {
                 }
 
                 //Check if no char after first position
-                if (!isNumeric(req.body.typedData.substring(1, 47), config().tituloLength - 1)) {
+                if (!helper.isNumeric(req.body.typedData.substring(1, 47), config().tituloLength - 1)) {
                     return res.status(config().httpInvalidInput).send({
                         validData: false,
                         amount: 0,
@@ -213,12 +206,12 @@ function read(req, res, next) {
 
                 // Get dueDate
                 if (dueFactor !== "0000") {
-                    dueDate = moment(getDueDate(parseInt(dueFactor), new Date(config().tituloBaseDate))).format("DD/MM/YYYY")
+                    dueDate = moment(getTituloDueDate(parseInt(dueFactor), new Date(config().tituloBaseDate))).format("DD/MM/YYYY")
                 }
 
 
                 //get barcode
-                barcode = barcodeBuilder(bankCode,currencyCode,dueFactor,stringAmount,filler)
+                barcode = barcodeBuilder(bankCode, currencyCode, dueFactor, stringAmount, filler)
 
 
                 return res.status(config().httpOk).send({

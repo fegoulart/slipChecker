@@ -3,8 +3,21 @@
 
 module.exports = {
     moduloDez: moduloDez,
-    moduloOnze: moduloOnze
+    moduloOnze: moduloOnze,
+    isNumeric: isNumeric
 };
+
+/***
+ * Check if typed data has only numbers
+ * @param data
+ * @param size
+ * @returns {boolean}
+ */
+function isNumeric(data, size) {
+    let myRegex = "[\\d]{" + size.toString() + "}";
+    let re = new RegExp(myRegex, "gmi");
+    return re.test(data);
+}
 
 /***
  * Returns modulo 10 verification digit

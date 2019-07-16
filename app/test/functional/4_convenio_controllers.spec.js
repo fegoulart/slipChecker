@@ -20,9 +20,9 @@ const titulo10 = '84640000003-6 98930296201-8 90710003000-2 00356248299-6' //inv
 chai.use(require('chai-things'));
 
 
-describe('Convenio controller', function () {
+describe('Convenio controller test', function () {
     describe('.post - Post /', function () {
-        it('should deny char título', function (done) {
+        it('should deny invalid typedData (with letters) test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo2) // x-www-form-urlencoded
@@ -97,7 +97,7 @@ describe('Convenio controller', function () {
                     done();
                 });
         });
-        it('should deny invalid product', function (done) {
+        it('should deny invalid product test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo7) // x-www-form-urlencoded
@@ -112,7 +112,7 @@ describe('Convenio controller', function () {
                     done();
                 });
         });
-        it('should deny invalid segment', function (done) {
+        it('should deny invalid segment test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo8) // x-www-form-urlencoded
@@ -127,7 +127,7 @@ describe('Convenio controller', function () {
                     done();
                 });
         });
-        it('should deny invalid real value', function (done) {
+        it('should deny invalid real value test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo9) // x-www-form-urlencoded
@@ -142,7 +142,7 @@ describe('Convenio controller', function () {
                     done();
                 });
         });
-        it('should deny invalid general dv', function (done) {
+        it('should deny invalid general dv test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo10) // x-www-form-urlencoded

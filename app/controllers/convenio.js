@@ -5,7 +5,10 @@ let config = require('../config'); // get our config file
 let helper = require('./helper');
 
 module.exports = {
-    read: read
+    read: read,
+    isDate: isDate, //for unit test purpose
+    getConvenioDueDate: getConvenioDueDate
+
 };
 
 
@@ -34,10 +37,16 @@ function isDate(data) {
  * @param stringDueDate
  * @returns {moment.Moment|null}
  */
-function getDueDate(stringDueDate) {
+function getConvenioDueDate(stringDueDate) {
     try {
         let myDate = new Date(stringDueDate.substring(4, 6) + "/" + stringDueDate.substring(6, 8) + "/" + stringDueDate.substring(0, 4));
-        return moment(myDate)
+
+        let returnDate = moment(myDate);
+        let isValid = returnDate.isValid();
+        if (isValid) {
+            return moment(myDate)
+        }
+        return null
 
     } catch (err) {
         console.log("stringDueDate: " + stringDueDate);
@@ -47,17 +56,7 @@ function getDueDate(stringDueDate) {
 
 }
 
-/***
- * Check if typed data has only numbers
- * @param data
- * @param size
- * @returns {boolean}
- */
-function isNumeric(data, size) {
-    let myRegex = "[\\d]{" + size.toString() + "}";
-    let re = new RegExp(myRegex, "gmi");
-    return re.test(data);
-}
+
 
 /***
  * Checks if typed data is valid and returns amount, dueDate and barcode
@@ -68,7 +67,7 @@ function isNumeric(data, size) {
 function read(req, res) {
     try {
 
-        if (!isNumeric(req.body.typedData, config().convenioLength)) {
+        if (!helper.isNumeric(req.body.typedData, config().convenioLength)) {
             return res.status(config().httpInvalidInput).send({
                 validData: false,
                 amount: 0,
@@ -203,7 +202,7 @@ function read(req, res) {
 
         //Get dueDate
         if (isDate(stringDueDate)) {
-            dueDate = getDueDate(stringDueDate).format("DD/MM/YYYY")
+            dueDate = getConvenioDueDate(stringDueDate).format("DD/MM/YYYY")
         }
 
         return res.status(config().httpOk).send({

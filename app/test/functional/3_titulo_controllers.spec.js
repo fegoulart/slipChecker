@@ -17,9 +17,9 @@ const titulo8 = '23792.40308 90000.871286 S7003.613700 4 79460000122399' //lette
 chai.use(require('chai-things'));
 
 
-describe('Titulo controller', function () {
+describe('Titulo controller test', function () {
     describe('.post - Post /', function () {
-        it('invalid bank testing', function (done) {
+        it('invalid bank test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo2) // x-www-form-urlencoded
@@ -36,7 +36,7 @@ describe('Titulo controller', function () {
 
 
         });
-        it('invalid currency testing', function (done) {
+        it('invalid currency test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo3) // x-www-form-urlencoded
@@ -53,7 +53,7 @@ describe('Titulo controller', function () {
 
 
         });
-        it('invalid field1 dv testing', function (done) {
+        it('invalid field1 dv test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo4) // x-www-form-urlencoded
@@ -70,7 +70,7 @@ describe('Titulo controller', function () {
 
 
         });
-        it('invalid field2 dv testing', function (done) {
+        it('invalid field2 dv test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo5) // x-www-form-urlencoded
@@ -87,7 +87,7 @@ describe('Titulo controller', function () {
 
 
         });
-        it('invalid field3 dv testing', function (done) {
+        it('invalid field3 dv test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo6) // x-www-form-urlencoded
@@ -104,7 +104,7 @@ describe('Titulo controller', function () {
 
 
         });
-        it('check amount and barcode', function (done) {
+        it('check amount and barcode test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo7) // x-www-form-urlencoded
@@ -121,7 +121,7 @@ describe('Titulo controller', function () {
 
 
         });
-        it('letter invalid test', function (done) {
+        it('invalid typedData (with letter) test', function (done) {
             request(app)
                 .post('/')
                 .send('typedData=' + titulo8) // x-www-form-urlencoded
