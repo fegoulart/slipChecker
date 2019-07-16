@@ -9,8 +9,8 @@ module.exports = {
 };
 
 
-const validSegments = ["1", "2", "3", "4", "5", "6", "7", "9"]
-const validRealValues = ["6", "7", "8", "9"]
+const validSegments = ["1", "2", "3", "4", "5", "6", "7", "9"];
+const validRealValues = ["6", "7", "8", "9"];
 
 
 /***
@@ -36,7 +36,7 @@ function isDate(data) {
  */
 function getDueDate(stringDueDate) {
     try {
-        let myDate = new Date(stringDueDate.substring(4, 6) + "/" + stringDueDate.substring(6, 8) + "/" + stringDueDate.substring(0, 4))
+        let myDate = new Date(stringDueDate.substring(4, 6) + "/" + stringDueDate.substring(6, 8) + "/" + stringDueDate.substring(0, 4));
         return moment(myDate)
 
     } catch (err) {
@@ -78,29 +78,26 @@ function read(req, res) {
             })
         }
 
-        let field1 = req.body.typedData.substring(0, 11)
-        let dvField1 = req.body.typedData.substring(11, 12)
-        let field2 = req.body.typedData.substring(12, 23)
-        let dvField2 = req.body.typedData.substring(23, 24)
-        let field3 = req.body.typedData.substring(24, 35)
-        let dvField3 = req.body.typedData.substring(35, 36)
-        let field4 = req.body.typedData.substring(36, 47)
-        let dvField4 = req.body.typedData.substring(47, 48)
-        let barcode = field1 + field2 + field3 + field4
-        let product = barcode.substring(0, 1)
-        let segment = barcode.substring(1, 2)
-        let realValue = barcode.substring(2, 3)
-        let generalDv = barcode.substring(3, 4)
-        let stringAmount = barcode.substring(4, 15)
-        let companyId = barcode.substring(15, 19)
-        let cnpj = barcode.substring(15, 23)
-        let stringDueDate = barcode.substring(19, 27)
-        let dueDate = null
+        let field1 = req.body.typedData.substring(0, 11);
+        let dvField1 = req.body.typedData.substring(11, 12);
+        let field2 = req.body.typedData.substring(12, 23);
+        let dvField2 = req.body.typedData.substring(23, 24);
+        let field3 = req.body.typedData.substring(24, 35);
+        let dvField3 = req.body.typedData.substring(35, 36);
+        let field4 = req.body.typedData.substring(36, 47);
+        let dvField4 = req.body.typedData.substring(47, 48);
+        let barcode = field1 + field2 + field3 + field4;
+        let product = barcode.substring(0, 1);
+        let segment = barcode.substring(1, 2);
+        let realValue = barcode.substring(2, 3);
+        let stringAmount = barcode.substring(4, 15);
+        let stringDueDate = barcode.substring(19, 27);
+        let dueDate = null;
 
-        let amount = 0.00
+        let amount = 0.00;
 
         //Product check
-        if (product != "8") {
+        if (product !== "8") {
             return res.status(config().httpInvalidInput).send({
                 validData: false,
                 amount: 0,
@@ -133,7 +130,7 @@ function read(req, res) {
         }
 
         //Field 1 Check
-        if (dvField1 != helper.moduloDez(field1)) {
+        if (dvField1 !== helper.moduloDez(field1)) {
             return res.status(config().httpInvalidInput).send({
                 validData: false,
                 amount: 0,
@@ -144,7 +141,7 @@ function read(req, res) {
         }
 
         //Field 2 Check
-        if (dvField2 != helper.moduloDez(field2)) {
+        if (dvField2 !== helper.moduloDez(field2)) {
             return res.status(config().httpInvalidInput).send({
                 validData: false,
                 amount: 0,
@@ -155,7 +152,7 @@ function read(req, res) {
         }
 
         //Field 3 Check
-        if (dvField3 != helper.moduloDez(field3)) {
+        if (dvField3 !== helper.moduloDez(field3)) {
             return res.status(config().httpInvalidInput).send({
                 validData: false,
                 amount: 0,
@@ -166,7 +163,7 @@ function read(req, res) {
         }
 
         //Field 4 Check
-        if (dvField4 != helper.moduloDez(field4)) {
+        if (dvField4 !== helper.moduloDez(field4)) {
             return res.status(config().httpInvalidInput).send({
                 validData: false,
                 amount: 0,
@@ -177,8 +174,8 @@ function read(req, res) {
         }
 
         //General DV Check
-        if (realValue == "6" || realValue == "7") {
-            if (barcode.substring(3, 4) != helper.moduloDez(barcode.substring(0, 3) + barcode.substring(4))) {
+        if (realValue === "6" || realValue === "7") {
+            if (barcode.substring(3, 4) !== helper.moduloDez(barcode.substring(0, 3) + barcode.substring(4))) {
                 return res.status(config().httpInvalidInput).send({
                     validData: false,
                     amount: 0,
@@ -188,7 +185,7 @@ function read(req, res) {
                 })
             }
         } else {
-            if (barcode.substring(3, 4) != helper.moduloOnze(barcode.substring(0, 3) + barcode.substring(4))) {
+            if (barcode.substring(3, 4) !== helper.moduloOnze(barcode.substring(0, 3) + barcode.substring(4))) {
                 return res.status(config().httpInvalidInput).send({
                     validData: false,
                     amount: 0,
@@ -200,7 +197,7 @@ function read(req, res) {
         }
 
         //Get amount
-        if (realValue == "6" || realValue == "8") {
+        if (realValue === "6" || realValue === "8") {
             amount = 1 * stringAmount.substring(0, 9) + 0.01 * stringAmount.substring(9, 11)
         }
 

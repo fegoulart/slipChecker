@@ -141,9 +141,9 @@ function read(req, res, next) {
                 let dueFactor = req.body.typedData.substring(33, 37)
                 let stringAmount = req.body.typedData.substring(37, 47)
                 let amount = 1 * req.body.typedData.substring(37, 45) + 0.01 * req.body.typedData.substring(45, 47)
-                let filling = "0000000000000000000000000"
+                let filler = field1.substring(4,9) + field2 + field3
                 let dueDate = null
-                let barcode = null
+                let barcode = "00000000000000000000000000000000000000000000"
                 //Check Bank Code
 
                 if (!isABank(bankCode, brazilianBanks)) {
@@ -212,15 +212,13 @@ function read(req, res, next) {
                 }
 
                 // Get dueDate
-
-
                 if (dueFactor !== "0000") {
                     dueDate = moment(getDueDate(parseInt(dueFactor), new Date(config().tituloBaseDate))).format("DD/MM/YYYY")
                 }
 
 
                 //get barcode
-                barcode = barcodeBuilder(bankCode,currencyCode,dueFactor,stringAmount,filling)
+                barcode = barcodeBuilder(bankCode,currencyCode,dueFactor,stringAmount,filler)
 
 
                 return res.status(config().httpOk).send({

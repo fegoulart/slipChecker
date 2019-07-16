@@ -17,7 +17,7 @@ function get(req, res) {
         res.status(config().httpOk)
             .json({message: 'All good. Go back to bed.'});
     } catch (err) {
-        console.log("Request: " + req.body)
+        console.log("Request: " + req.body);
         console.log("Slip verify error " + err.name + " - " + err.message);
         return res.status(config().httpServerError).send({
             validData: false,

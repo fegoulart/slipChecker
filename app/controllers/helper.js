@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 
 module.exports = {
@@ -15,7 +15,7 @@ function moduloDez(codigo) {
     try {
         let mult = 2;
         let sum = 0;
-        let dv = 0;
+        let dv;
 
         for (let i = codigo.length - 1; i >= 0; i--) {
 
@@ -31,9 +31,9 @@ function moduloDez(codigo) {
                 product = product - 9
             }
 
-            sum += product
+            sum += product;
 
-            if (mult == 2) {
+            if (mult === 2) {
                 mult = 1
             } else {
                 mult = 2
@@ -42,7 +42,7 @@ function moduloDez(codigo) {
         }
 
         dv = sum % 10;
-        if (dv != 0) {
+        if (dv !== 0) {
             dv = 10 - dv
         }
 
@@ -66,7 +66,7 @@ function moduloOnze(codigo) {
     try {
         let mult = 2;
         let sum = 0;
-        let dv = 0;
+        let dv;
 
         for (let i = codigo.length - 1; i >= 0; i--) {
 
@@ -74,7 +74,7 @@ function moduloOnze(codigo) {
             let product = 0;
 
             product = digit * mult;
-            sum += product
+            sum += product;
 
             if (mult < 9) {
                 mult++;
@@ -84,7 +84,7 @@ function moduloOnze(codigo) {
 
         }
 
-        dv = sum % 11
+        dv = sum % 11;
         if (dv < 2) {
             dv = 1
         } else {

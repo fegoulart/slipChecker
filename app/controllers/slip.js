@@ -30,11 +30,11 @@ function verify(req, res, next) {
 
         req.body.typedData = req.body.typedData.replace(/[^\d\w]/gmi, '');
         if (req.body.typedData.length === config().tituloLength) {
-            req.slipType = config().tituloSlipType
+            req.slipType = config().tituloSlipType;
             next()
         } else {
             if (req.body.typedData.length === config().convenioLength) {
-                req.slipType = config().convenioSlipType
+                req.slipType = config().convenioSlipType;
                 next()
             } else {
                 return res.status(config().httpInvalidInput).send({
@@ -49,7 +49,7 @@ function verify(req, res, next) {
 
 
     } catch (err) {
-        console.log("Request: " + req.body)
+        console.log("Request: " + req.body);
         console.log("Slip verify error " + err.name + " - " + err.message);
         return res.status(config().httpServerError).send({
             validData: false,
