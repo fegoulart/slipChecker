@@ -72,7 +72,7 @@ Sample request:
     "validData": true,
     "amount": 1223.99,
     "dueDate": "10/07/2019",
-    "barcode": "23791794600001223990000000000000000000000000",
+    "barcode": "23794794600001223992403090000871285700361370",
     "message": "Titulo successfully verified."
 }
 ```
