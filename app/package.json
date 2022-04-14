@@ -13,7 +13,7 @@
   "author": "Fernando Luiz Goulart <fegoulart@gmail.com>",
   "license": "Apache License 2.0",
   "dependencies": {
-    "async": "^3.1.0",
+    "async": "^3.2.2",
     "body-parser": "~1.19.0",
     "express": "~4.17.1",
     "moment": "^2.24.0",
